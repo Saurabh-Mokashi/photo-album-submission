@@ -1,3 +1,4 @@
+# Assignment 3 demo: deployed from photo-album-submission main.
 import hashlib
 import json
 import os
