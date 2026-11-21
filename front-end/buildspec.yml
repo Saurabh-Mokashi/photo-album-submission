@@ -1,0 +1,16 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: "3.12"
+      nodejs: "22"
+  build:
+    commands:
+      - node --check app.js
+      - python scripts/build.py
+
+artifacts:
+  base-directory: dist
+  files:
+    - '**/*'

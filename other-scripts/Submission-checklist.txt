@@ -1,0 +1,9 @@
+Before submission
+- Add both team members' names and NetIDs to the release/submission description.
+- Keep this snapshot synchronized with any final demo commits in the two pipeline repositories.
+- Create a GitHub release containing this three-folder source package.
+- Record one continuous unedited 3–6 minute screen recording.
+- Show Albert profile for 2–3 seconds, AWS configurations, independent/group/custom-label photo searches, fresh pushes triggering both pipelines, deployment results, and CloudFormation resources.
+- Upload the video to YouTube as Unlisted.
+- Submit release/code, repository URL, and YouTube link on Brightspace.
+- Keep services running for 2–3 days after the deadline.

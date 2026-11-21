@@ -1,0 +1,9 @@
+**/dist/
+!front-end/sdk/lib/axios/dist/
+!front-end/sdk/lib/axios/dist/**
+**/__pycache__/
+*.pyc
+.venv/
+.env
+.env.*
+.DS_Store

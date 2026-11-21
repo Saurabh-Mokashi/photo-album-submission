@@ -1,0 +1,25 @@
+version: 0.2
+
+env:
+  variables:
+    DEPLOY_REGION: us-east-1
+    INDEX_FUNCTION_NAME: index-photos
+    SEARCH_FUNCTION_NAME: search-photos
+
+phases:
+  install:
+    runtime-versions:
+      python: "3.12"
+    commands:
+      - aws --version
+  build:
+    commands:
+      - python scripts/build.py
+  post_build:
+    commands:
+      - bash scripts/deploy.sh
+
+artifacts:
+  files:
+    - dist/index-photos.zip
+    - dist/search-photos.zip
