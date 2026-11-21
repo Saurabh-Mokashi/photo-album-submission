@@ -1,4 +1,4 @@
-# Assignment 3 final demo: automatic deployment from submission main.
+# Assignment 3 recording: GitHub push automatically deploys this Lambda.
 import json
 import logging
 import os
