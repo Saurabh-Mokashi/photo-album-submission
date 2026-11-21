@@ -2,6 +2,7 @@
 import json
 import logging
 import os
+import re
 import uuid
 from urllib.parse import urlparse
 
@@ -47,6 +48,22 @@ def respond(status, body):
     }
 
 
+def literal_search_keywords(query):
+    """Recover literal labels only after Lex recognizes SearchIntent."""
+    text = " ".join(query.lower().strip().split()).strip(" .?!")
+    text = re.sub(
+        r"^(?:show me(?: (?:photos|pictures)(?: (?:with|of))?)?|"
+        r"find(?: (?:photos|pictures)(?: (?:with|of))?)?|"
+        r"(?:photos|pictures) (?:of|with))\s+",
+        "", text,
+    )
+    text = re.sub(r"\s+in them$", "", text).strip()
+    parts = re.split(r"\s+and\s+", text)
+    if not 1 <= len(parts) <= 2:
+        return []
+    return list(dict.fromkeys(part for part in parts if part))
+
+
 def extract_keywords(query):
     response = lex.recognize_text(
         botId=os.environ["LEX_BOT_ID"],
@@ -74,6 +91,12 @@ def extract_keywords(query):
 
         if keyword and keyword not in keywords:
             keywords.append(keyword)
+
+    # Custom labels are open vocabulary: Lex may recognize the intent but
+    # leave optional slots empty for labels absent from its training values.
+    if not keywords:
+        keywords = literal_search_keywords(query)
+        logger.info("SEARCH_KEYWORD_SOURCE: literal SearchIntent recovery")
 
     logger.info("SEARCH_KEYWORDS: %s", json.dumps(keywords))
     return keywords
