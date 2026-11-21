@@ -1,4 +1,4 @@
-# Assignment 3 demo: deployed from photo-album-submission main.
+# Assignment 3 final demo: automatic deployment from submission main.
 import json
 import logging
 import os
