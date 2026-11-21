@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Resolve packages relative to this script, including in the consolidated repository.
+cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.."
+
 if [[ "${CODEBUILD_BUILD_SUCCEEDING:-0}" != "1" ]]; then
   echo "Build did not succeed; deployment stopped."
   exit 1

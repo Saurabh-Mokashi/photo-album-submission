@@ -17,14 +17,20 @@ API: https://s0khdyagpg.execute-api.us-east-1.amazonaws.com/test
 
 Region: us-east-1. GET /search invokes the search Lambda; PUT /photos integrates directly with S3. Both require the same API key, supplied automatically by the deployed frontend. The generated public website contains that key; the repository contains only its build placeholder. Photo objects remain private and are displayed using presigned URLs.
 
-## CI/CD source repositories
+## CI/CD source repository
 
-These existing repositories remain the source for the working pipelines:
+Repository: https://github.com/Saurabh-Mokashi/photo-album-submission
 
-- Frontend: https://github.com/Saurabh-Mokashi/photo-album-frontend
-- Backend: https://github.com/Saurabh-Mokashi/photo-album-backend
+Branch: main. Both pipelines should use this repository and branch as their source.
 
-This submission repository consolidates their source into the required three-folder layout. It does not replace either pipeline source. Frontend CodeBuild runs from the front-end source root and needs PHOTO_API_KEY in its environment. Backend CodeBuild runs from the lambda-functions source root. See the component README files for build details. The CloudFormation template is located under other-scripts/cloudformation in this consolidated package.
+- Frontend CodeBuild project: photo-album-frontend-build. Buildspec: front-end/buildspec.yml. Keep PHOTO_API_KEY configured in the project environment. Artifact root: front-end/dist.
+- Backend CodeBuild project: photo-album-backend-build. Buildspec: lambda-functions/buildspec.yml. Deploys code to index-photos and search-photos while preserving their configuration.
+- P2 deploys BuildArtifact to cc-s3-b1-36234 with extraction enabled.
+- CloudFormation template: other-scripts/cloudformation/photo-album.yaml.
+
+Both buildspec files run from the repository root. For local frontend validation, set PHOTO_API_KEY in your environment, then run python3 front-end/scripts/build.py. For backend packaging, run python3 lambda-functions/scripts/build.py.
+
+The earlier separate frontend/backend repositories are historical copies. Pipeline migration must be verified with a fresh main-branch push before claiming CI/CD uses this consolidated repository.
 
 ## Verification completed
 

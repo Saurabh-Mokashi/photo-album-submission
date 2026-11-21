@@ -7,10 +7,10 @@ phases:
       nodejs: "22"
   build:
     commands:
-      - node --check app.js
-      - python scripts/build.py
+      - node --check front-end/app.js
+      - python front-end/scripts/build.py
 
 artifacts:
-  base-directory: dist
+  base-directory: front-end/dist
   files:
     - '**/*'

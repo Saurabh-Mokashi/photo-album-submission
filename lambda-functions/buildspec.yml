@@ -14,12 +14,12 @@ phases:
       - aws --version
   build:
     commands:
-      - python scripts/build.py
+      - python lambda-functions/scripts/build.py
   post_build:
     commands:
-      - bash scripts/deploy.sh
+      - bash lambda-functions/scripts/deploy.sh
 
 artifacts:
   files:
-    - dist/index-photos.zip
-    - dist/search-photos.zip
+    - lambda-functions/dist/index-photos.zip
+    - lambda-functions/dist/search-photos.zip
