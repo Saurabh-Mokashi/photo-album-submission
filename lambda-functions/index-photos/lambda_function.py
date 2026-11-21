@@ -1,4 +1,4 @@
-# Assignment 3 recording: GitHub push automatically deploys this Lambda.
+# Assignment 3 release demo: deployed automatically from GitHub main.
 import hashlib
 import json
 import os
